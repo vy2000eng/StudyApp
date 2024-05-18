@@ -1,0 +1,26 @@
+//
+//  FlashCardModel.swift
+//  Planify_v4
+//
+//  Created by VladyslavYatsuta on 5/7/24.
+//
+
+import Foundation
+
+struct FlashCard:Identifiable{
+    let id:UUID
+    var front:String
+    var back:String
+    
+    init(id: UUID = UUID(), front: String, back: String) {
+        self.id = id
+        self.front = front
+        self.back = back
+    }
+    
+    static var emtpyFlashCard:FlashCard{
+        FlashCard(front: "", back: "" )
+    }
+}
+
+

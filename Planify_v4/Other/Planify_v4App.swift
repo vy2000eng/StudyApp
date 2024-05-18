@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Planify_v4App: App {
+    @StateObject var viewModel = SubjectViewViewModel(subjects: Subject.sampleData)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //NavigationView{
+                SubjectView(viewModel: viewModel)
+            //}
         }
     }
 }
