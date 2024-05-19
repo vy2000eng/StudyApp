@@ -16,12 +16,28 @@ class FlashCardCollectionScrollViewViewModel: ObservableObject {
 //        self.subject = subject
 //    }
     @Published var titles: [FlashCard]
+    var updateIndex: (Int) ->Void
+    var index:Int
     // let names = ["sam", "mike", "John", "Kevin", "James"]
     //@Published var selectedIndex: Int
    // @Published var currentIndex: Int
-    init(titles: [FlashCard]) {
+    init(titles: [FlashCard], index: Int,updateIndex: @escaping (Int) -> Void) {
+        
         self.titles = titles
+        self.index = index
+        self.updateIndex = updateIndex
     }
+    
+    
+    func updateIdx(index:Int){
+        self.index = index
+        saveChanges()
+    }
+    
+    func saveChanges(){
+        updateIndex(index)
+    }
+    
     
 //    init(titles: [FlashCard], selectedIndex: Int  , currentIndex: Int = 0) {
 //        self.titles = titles

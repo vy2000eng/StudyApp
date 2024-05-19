@@ -29,6 +29,10 @@ class FlashCardViewViewModel: ObservableObject {
         
     }
     
+    func updateIndex(idx: Int){
+        index = idx
+    }
+    
     func updateFlashCard(flashCard: FlashCard){
         if let index = flashcards.firstIndex(where: {$0.id == flashCard.id}){
             flashcards[index] = flashCard

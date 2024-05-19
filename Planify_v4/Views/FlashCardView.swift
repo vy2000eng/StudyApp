@@ -34,11 +34,10 @@ struct FlashCardView: View {
                 .animation(.easeInOut, value: viewModel.isListView)
                 
                 VStack(){
-                    FlashCardCollectionScrollView(
-                        viewModel:          FlashCardCollectionScrollViewViewModel(
-                                                titles: viewModel.flashcards),
-                        flashCardViewModel: viewModel
-                    )
+                    FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: viewModel.index, updateIndex:{updateIndex in
+                        viewModel.updateIndex(idx: updateIndex)
+                        
+                    } )
                 }
                 .transition(.slide) // Add a sliding transition
                 .animation(.easeInOut, value: viewModel.isListView)

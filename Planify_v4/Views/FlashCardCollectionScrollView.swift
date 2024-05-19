@@ -9,8 +9,15 @@ import SwiftUI
 
 struct FlashCardCollectionScrollView: View {
     
-    @StateObject var viewModel            : FlashCardCollectionScrollViewViewModel
-    @ObservedObject var flashCardViewModel: FlashCardViewViewModel
+//    @StateObject var viewModel            : FlashCardCollectionScrollViewViewModel
+//    @ObservedObject var flashCardViewModel: FlashCardViewViewModel
+    
+    @StateObject var viewModel: FlashCardCollectionScrollViewViewModel
+    init(flashcards:[FlashCard],index:Int ,updateIndex: @escaping(Int)->Void){
+        self._viewModel = StateObject(wrappedValue: FlashCardCollectionScrollViewViewModel(titles: flashcards, index: index,updateIndex: updateIndex))
+        
+    }
+    
     
     var body: some View {
         VStack{
@@ -20,7 +27,7 @@ struct FlashCardCollectionScrollView: View {
                 HStack(alignment: .center,spacing:20){
                     ForEach(0..<viewModel.titles.count,id: \.self){ fc_index in
                         Button(action: {withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.4)){
-                            flashCardViewModel.changeState(state: fc_index)
+                            viewModel.updateIdx(index: fc_index)
                         }
                         }) {
                             Text(viewModel.titles[fc_index].front)
@@ -46,15 +53,15 @@ struct FlashCardCollectionScrollView: View {
 
 struct FlashCardCollectionScrollView_Previews: PreviewProvider {
     @State static var index = 0
-    @ObservedObject static var viewModel = FlashCardCollectionScrollViewViewModel(titles:
-                                 Subject.sampleData[1].flashcards)
-    
-    @ObservedObject static var fcView = FlashCardViewViewModel(
+
+    @ObservedObject static var viewModel = FlashCardViewViewModel(
         flashcards: Subject.sampleData[1].flashcards)
     
+    
     static var previews: some View {
-        FlashCardCollectionScrollView(
-        viewModel:          viewModel,
-        flashCardViewModel: fcView )
+//        FlashCardCollectionScrollView(
+//        viewModel:          viewModel,
+//        flashCardViewModel: fcView )
+        FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: index, updateIndex: {updateIndex in viewModel.updateIndex(idx: updateIndex)})
     }
 }

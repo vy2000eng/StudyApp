@@ -12,17 +12,14 @@ class FlashCardContentViewViewModel: ObservableObject {
 
     var flashcard:FlashCard
     @Published var isShowingFront:Bool
-    //var cardIndex:Int
     var updateParent: (FlashCard) -> Void
     
 
     init(flashcard: FlashCard, isShowingFront: Bool = true, updateParent: @escaping (FlashCard) -> Void) {
         self.flashcard = flashcard
         self.isShowingFront = isShowingFront
-      ///  self.cardIndex = cardIndex
         self.updateParent = updateParent
-        //self.cardIndex = cardIndex
-       // self.fcViewModel = fcViewModel
+      
     }
     
     func toggleIsShowingFront(){
