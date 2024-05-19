@@ -9,16 +9,23 @@ import SwiftUI
 
 struct FlashCardView: View {
     
+   // @StateObject var viewModel = FlashCardViewViewModel(
+    //var flashCards : Flashcard
     @StateObject var viewModel: FlashCardViewViewModel
+    init(flashcards: [FlashCard]) {
+        self._viewModel =
+        StateObject(wrappedValue: FlashCardViewViewModel(flashcards: flashcards))
+            
+    }
     
     var body: some View{
         VStack(alignment: .center, spacing: 0){
             
             if !viewModel.isListView{
                 TabView(selection: $viewModel.index){
-                    ForEach(viewModel.flashcards.indices,id: \.self){ fc_index in
-                       // FlashCardContentView(fc_index: fc_index)
-                        FlashCardContentView(fc_index: fc_index)
+                    ForEach(viewModel.flashcards.indices, id: \.self ){ fc_index in
+                        FlashCardContentView(flashCard: viewModel.flashcards[fc_index],
+                                             updateParent: {updateFlashCard in viewModel.updateFlashCard(flashCard: updateFlashCard)})
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -72,7 +79,7 @@ struct FlashCardView_Previews: PreviewProvider {
     static var previews: some View {
         //FlashCardView(flashcards: $flashcards)
         NavigationStack{
-            FlashCardView(viewModel: viewModel)
+            FlashCardView(flashcards: viewModel.flashcards)
             
         }
  

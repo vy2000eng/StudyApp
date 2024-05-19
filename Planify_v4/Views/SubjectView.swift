@@ -25,18 +25,18 @@ struct SubjectView: View {
             {
                 List{
                     Section{
-                        ForEach($viewModel.subjects.indices,id: \.self)
+                        ForEach($viewModel.subjects)
                         {
-                            subjectIndex in
+                            $subject in
                             NavigationLink(destination:
-                                            SubjectDetailsView(subject: viewModel.subjects[subjectIndex],
+                                            SubjectDetailsView(subject: subject,
                                                                updateParent:
                                                                             { updatedSubject in
                                                                                 viewModel.updateSubject(subject: updatedSubject)})
                             ){
                                // viewModel.updateIndex(index: subjectIndex)
                                 //viewModel.index = subjectIndex
-                                Text(viewModel.subjects[subjectIndex].title)
+                                Text(subject.title)
                                 
                                     
                                 }
