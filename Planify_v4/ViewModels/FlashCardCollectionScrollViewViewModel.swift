@@ -29,6 +29,7 @@ class FlashCardCollectionScrollViewViewModel: ObservableObject {
     }
     
     
+    
     func updateIdx(index:Int){
         self.index = index
         saveChanges()

@@ -55,7 +55,12 @@ struct FlashCardView: View {
             }
             else{
               //  NavigationView{
-                    FlashCardListView(viewModel: FlashCardListViewViewModel(flashCardViewModel: viewModel))
+
+                FlashCardListView(flashcards: viewModel.flashcards,
+                                  updateFlashCard: {updateFlashCard in
+                                                        viewModel.updateFlashCard(
+                                                            flashCard: updateFlashCard)} )
+                //                    FlashCardListView(viewModel: FlashCardListViewViewModel(flashCardViewModel: viewModel))
             //    }
                 .transition(.move(edge: .bottom)) // Move in from the right
                 .animation(.easeInOut, value: viewModel.isListView)

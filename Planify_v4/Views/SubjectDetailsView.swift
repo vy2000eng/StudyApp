@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SubjectDetailsView: View {
-    var viewModel : SubjectDetailsViewViewModel
+    @StateObject var viewModel : SubjectDetailsViewViewModel
     
     init(subject: Subject, updateParent: @escaping (Subject) -> Void) {
-        self.viewModel = SubjectDetailsViewViewModel(subject: subject, updateParent: updateParent)
+        self._viewModel =
+        StateObject(wrappedValue: SubjectDetailsViewViewModel(subject: subject, updateParent: updateParent))
     }
     
     var body: some View {

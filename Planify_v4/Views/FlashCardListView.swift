@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct FlashCardListView: View {
-    // @Binding var flashcards: [FlashCard]
-    //@ObservedObject var viewModel:FlashCardCollectionScrollViewViewModel
-    
-    // @StateObject var viewModel            : FlashCardCollectionScrollViewViewModel
-    // @ObservedObject var flashCardViewModel: FlashCardViewViewModel
+
     @StateObject var viewModel: FlashCardListViewViewModel
-    @State  var index = 0
-    @State var isPresentingEditView = false
+    
+    init(flashcards: [FlashCard], updateFlashCard: @escaping (FlashCard)->Void) {
+        self._viewModel = StateObject(wrappedValue:
+                                        FlashCardListViewViewModel(flashcards: flashcards,
+                                                                   updateParentFlashCard: updateFlashCard))
+    }
+    
     
     
     @State private var selectedTab = "One"
@@ -23,80 +24,88 @@ struct FlashCardListView: View {
     var body: some View {
         VStack{
             List{
-                ForEach(viewModel.flashCardViewModel.flashcards.indices,id: \.self) { fc_index in
+                ForEach(viewModel.flashcards.indices,id: \.self) { fc_index in
                     Section{
                         HStack{
                             VStack(alignment: .leading){
-                                Text(viewModel.flashCardViewModel.flashcards[fc_index].front)
-                                    .multilineTextAlignment(    .leading)
+                                Text(viewModel.flashcards[fc_index].front)
+                                    .multilineTextAlignment(.leading)
                                     .bold()
                                     .font(.title3)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
-                                Text(viewModel.flashCardViewModel.flashcards[fc_index].back)
-                                    .multilineTextAlignment(    .leading)
+                                Text(viewModel.flashcards[fc_index].back)
+                                    .multilineTextAlignment(.leading)
                                     .font(.subheadline)
                             }
                             Spacer()
                             Image(systemName: "pencil")
                                 .font(.title2)
                                 .onTapGesture {
-                                    index = fc_index
-                                    isPresentingEditView = true
-                                    viewModel.editingFlashCard =
-                                    viewModel.flashCardViewModel.flashcards[index]
-                                    
+                                    viewModel.index = fc_index
+                                    viewModel.isPresentingEditingView = true
+                                    viewModel.emptyFlashCard = viewModel.flashcards[fc_index]
                                 }
                         }
                     }
                 }
             }
-            
-            .sheet(isPresented: $isPresentingEditView){
+            .sheet(isPresented: $viewModel.isPresentingEditingView){
                 NavigationView{
-                    FlashCardEditView(viewModel: FlashCardEditViewViewModel(editingFlashCard:          viewModel.flashCardViewModel.flashcards[index]
-                                                                           ))
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") {
-                                    isPresentingEditView = false
-                                }
+
+                    FlashCardEditView(viewModel: FlashCardEditViewViewModel(editingFlashCard:          viewModel.emptyFlashCard)
+                    ).toolbar{
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                viewModel.isPresentingEditingView = false
                             }
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Done") {
-                                    isPresentingEditView = false
-//                                    viewModel.flashCardViewModel.flashcards[index] = viewModel.editingFlashCard
-                                }
-                            }
-                            
-                            
-                            
-                            
                         }
-                    
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                viewModel.isPresentingEditingView = false
+                            }
+
+                        }
+
+                    }
+
                 }
-                
-                
-                
             }
             
-        }
-    }
-    
-    struct FlashCardListView_Previews: PreviewProvider {
-        //    @ObservedObject static var fcView = FlashCardViewViewModel(
-        //        flashcards: Subject.sampleData[1].flashcards)
-        @StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
-        @ObservedObject static var viewModel = FlashCardListViewViewModel(flashCardViewModel: fcViewModel)
-        static var previews: some View {
             
+            ////
+            ////
+            ///
+            ///
             
-            
-            //  NavigationView{
-            FlashCardListView(viewModel: viewModel)
-            
-            // }
+            ////
+            ////
+            ///
+            ///
             
         }
     }
 }
+
+        
+        
+        
+struct FlashCardListView_Previews: PreviewProvider {
+    //    @ObservedObject static var fcView = FlashCardViewViewModel(
+    //        flashcards: Subject.sampleData[1].flashcards)
+    //        @StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
+    //        @ObservedObject static var viewModel = FlashCardListViewViewModel(flashCardViewModel: fcViewModel)
+    @ObservedObject static var viewModel = FlashCardViewViewModel(
+        flashcards: Subject.sampleData[1].flashcards)
+    
+    static var previews: some View {
+        
+        
+        
+        //  NavigationView{
+        FlashCardListView(flashcards: viewModel.flashcards, updateFlashCard: {updateFlashCard in viewModel.updateFlashCard(flashCard: updateFlashCard)})
+        // }
+        
+    }
+}
+    

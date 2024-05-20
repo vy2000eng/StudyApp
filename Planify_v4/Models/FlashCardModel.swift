@@ -18,6 +18,12 @@ struct FlashCard:Identifiable{
         self.back = back
     }
     
+    init(id:UUID = UUID()){
+        self.id = id
+        self.front = ""
+        self.back = ""
+    }
+    
     static var emtpyFlashCard:FlashCard{
         FlashCard(front: "", back: "" )
     }

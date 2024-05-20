@@ -14,13 +14,33 @@ class FlashCardListViewViewModel: ObservableObject {
 //    init(subject: Subject) {
 //        self.subject = subject
 //    }
-    @Published var flashCardViewModel: FlashCardViewViewModel
-    @Published var editingFlashCard = FlashCard(front: "", back:"" )
+  //  @Published var flashCardViewModel: FlashCardViewViewModel
+    //@Published var editingFlashCard = FlashCard(front: "", back:"" )
     @Published var index = 0
+    @Published var flashcards: [FlashCard]
+    var updateParentFlashCard: (FlashCard) -> Void
+    @Published var emptyFlashCard = FlashCard()
+    @Published var isPresentingEditingView = false
+
     
-    init(flashCardViewModel: FlashCardViewViewModel) {
-        self.flashCardViewModel = flashCardViewModel
+    init(flashcards: [FlashCard], updateParentFlashCard: @escaping(FlashCard) ->Void ){
+        self.updateParentFlashCard = updateParentFlashCard
+        self.flashcards = flashcards
     }
+    
+    
+    
+    
+    func updateFlashCardCallBackFunc(){
+        updateParentFlashCard(emptyFlashCard)
+    }
+    
+    
+    
+    
+//    init(flashCardViewModel: FlashCardViewViewModel) {
+//        self.flashCardViewModel = flashCardViewModel
+//    }
 
     
 
