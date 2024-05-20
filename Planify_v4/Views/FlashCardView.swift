@@ -22,25 +22,36 @@ struct FlashCardView: View {
         VStack(alignment: .center, spacing: 0){
             
             if !viewModel.isListView{
-                TabView(selection: $viewModel.index){
-                    ForEach(viewModel.flashcards.indices, id: \.self ){ fc_index in
-                        FlashCardContentView(flashCard: viewModel.flashcards[fc_index],
-                                             updateParent: {updateFlashCard in viewModel.updateFlashCard(flashCard: updateFlashCard)})
-                    }
-                }
+                TabView(selection: $viewModel.index, content: {
+                    ForEach(
+                        viewModel.flashcards.indices, id: \.self,
+                        content: {
+                            fc_index in
+                            FlashCardContentView(
+                                flashCard:
+                                    viewModel.flashcards[fc_index],
+                                updateParent:{
+                                    updateFlashcard in viewModel.updateFlashCard(flashCard: updateFlashcard)
+                                })
+                        })
+                })
+                
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
                 .transition(.opacity) // Transition for TabView
                 .animation(.easeInOut, value: viewModel.isListView)
+                VStack(content: {
+                    FlashCardCollectionScrollView(
+                        flashcards: viewModel.flashcards,
+                        index: viewModel.index,
+                        updateIndex:
+                            {updateIndex in
+                                viewModel.updateIndex(idx: updateIndex)
+                    })
+                    .transition(.slide) // Add a sliding transition
+                    .animation(.easeInOut, value: viewModel.isListView)
+                })
                 
-                VStack(){
-                    FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: viewModel.index, updateIndex:{updateIndex in
-                        viewModel.updateIndex(idx: updateIndex)
-                        
-                    } )
-                }
-                .transition(.slide) // Add a sliding transition
-                .animation(.easeInOut, value: viewModel.isListView)
             }
             else{
               //  NavigationView{
@@ -51,7 +62,7 @@ struct FlashCardView: View {
                 
             }
         }.toolbar {
-            ToolbarItem(placement: .confirmationAction) {
+            ToolbarItem(placement: .confirmationAction, content: {
                 Button(action:{
                     withAnimation{
                         viewModel.toggleListView()
@@ -63,7 +74,7 @@ struct FlashCardView: View {
                     Image(systemName: "list.bullet.rectangle")
                         .font(.title2)
                 }
-            }
+            })
         }
         .environmentObject(viewModel)
         
