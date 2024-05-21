@@ -15,7 +15,7 @@
 		391BC70B2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391BC70A2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift */; };
 		392143BC2BF531A200E70C4F /* FlashcardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392143BB2BF531A200E70C4F /* FlashcardEditView.swift */; };
 		392143BE2BF531E600E70C4F /* FlashCardEditViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392143BD2BF531E600E70C4F /* FlashCardEditViewViewModel.swift */; };
-		3944F95F2BEA785D00CDA742 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F95E2BEA785D00CDA742 /* FlashCardView.swift */; };
+		39389CF52BFC156500DAB28B /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39389CF42BFC156500DAB28B /* FlashCardView.swift */; };
 		3944F9612BEA7CA900CDA742 /* FlashCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F9602BEA7CA900CDA742 /* FlashCardModel.swift */; };
 		3944F9632BEC92BD00CDA742 /* FlashCardViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F9622BEC92BD00CDA742 /* FlashCardViewViewModel.swift */; };
 		3944F9652BEE700800CDA742 /* FlashCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F9642BEE700800CDA742 /* FlashCardContentView.swift */; };
@@ -39,7 +39,7 @@
 		391BC70A2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCollectionScrollView.swift; sourceTree = "<group>"; };
 		392143BB2BF531A200E70C4F /* FlashcardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardEditView.swift; sourceTree = "<group>"; };
 		392143BD2BF531E600E70C4F /* FlashCardEditViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardEditViewViewModel.swift; sourceTree = "<group>"; };
-		3944F95E2BEA785D00CDA742 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
+		39389CF42BFC156500DAB28B /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		3944F9602BEA7CA900CDA742 /* FlashCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardModel.swift; sourceTree = "<group>"; };
 		3944F9622BEC92BD00CDA742 /* FlashCardViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardViewViewModel.swift; sourceTree = "<group>"; };
 		3944F9642BEE700800CDA742 /* FlashCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardContentView.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			children = (
 				39C24EF12BE426350013F78C /* SubjectView.swift */,
 				39C24EF62BE4811E0013F78C /* SubjectDetailsView.swift */,
-				3944F95E2BEA785D00CDA742 /* FlashCardView.swift */,
+				39389CF42BFC156500DAB28B /* FlashCardView.swift */,
 				3944F9642BEE700800CDA742 /* FlashCardContentView.swift */,
 				391BC70A2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift */,
 				390002C12BF112440082EF8B /* FlashCardListView.swift */,
@@ -178,7 +178,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					39C24ED32BE418AF0013F78C = {
 						CreatedOnToolsVersion = 14.3;
@@ -225,9 +225,9 @@
 				392143BC2BF531A200E70C4F /* FlashcardEditView.swift in Sources */,
 				392143BE2BF531E600E70C4F /* FlashCardEditViewViewModel.swift in Sources */,
 				39C24EF22BE426350013F78C /* SubjectView.swift in Sources */,
-				3944F95F2BEA785D00CDA742 /* FlashCardView.swift in Sources */,
 				3944F9612BEA7CA900CDA742 /* FlashCardModel.swift in Sources */,
 				39C24EF02BE424D40013F78C /* SubjectModel.swift in Sources */,
+				39389CF52BFC156500DAB28B /* FlashCardView.swift in Sources */,
 				390002C82BF28C1D0082EF8B /* FlashCardCollectionScrollViewViewModel.swift in Sources */,
 				3944F9632BEC92BD00CDA742 /* FlashCardViewViewModel.swift in Sources */,
 				39C24EF42BE47DB60013F78C /* SubjectViewViewModel.swift in Sources */,
@@ -249,6 +249,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -281,6 +282,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -309,6 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -341,6 +344,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

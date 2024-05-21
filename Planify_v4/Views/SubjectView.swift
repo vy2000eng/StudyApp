@@ -6,8 +6,7 @@
 //
 
 
-//   SubjectDetailsView(viewModel: SubjectDetailsViewViewModel(subject: subject, svViewModel: viewModel))){
-//     Text(subject.title)
+
 //}
 import SwiftUI
 

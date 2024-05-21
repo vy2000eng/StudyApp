@@ -9,12 +9,37 @@ import Foundation
 
 class FlashCardEditViewViewModel: ObservableObject{
   
-    @Published var editingFlashCard : FlashCard
+    @Published var flashCard : FlashCard
+    var onFlashCardUpdate: (FlashCard) ->Void
+    @Published var isEditing = false
+    
 
     
     
-    init(editingFlashCard: FlashCard) {
-        self.editingFlashCard = editingFlashCard
+    init(flashCard: FlashCard, onFlashCardUpdate: @escaping (FlashCard)->Void) {
+        self.flashCard = flashCard
+        self.onFlashCardUpdate = onFlashCardUpdate
+    }
+    
+    func toggleIsEditting(){
+        isEditing.toggle()
+    }
+    
+    func updateFront(front:String){
+        flashCard.front = front
+        saveChanges()
+
+    }
+    
+    func updateBack(back:String){
+        flashCard.back = back
+        saveChanges()
+
+    }
+    
+    func saveChanges(){
+        onFlashCardUpdate(flashCard)
+        
     }
     
     

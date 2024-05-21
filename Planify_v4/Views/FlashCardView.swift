@@ -1,9 +1,10 @@
 //
-//  FlashCardView.swift
+//  FlashCardView2.swift
 //  Planify_v4
 //
-//  Created by VladyslavYatsuta on 5/7/24.
+//  Created by VladyslavYatsuta on 5/20/24.
 //
+
 
 import SwiftUI
 
@@ -15,7 +16,6 @@ struct FlashCardView: View {
     init(flashcards: [FlashCard]) {
         self._viewModel =
         StateObject(wrappedValue: FlashCardViewViewModel(flashcards: flashcards))
-            
     }
     
     var body: some View{
@@ -56,10 +56,9 @@ struct FlashCardView: View {
             else{
               //  NavigationView{
 
-                FlashCardListView(flashcards: viewModel.flashcards,
-                                  updateFlashCard: {updateFlashCard in
-                                                        viewModel.updateFlashCard(
-                                                            flashCard: updateFlashCard)} )
+                FlashCardListView(flashcards: viewModel.flashcards, onFlashCardUpdate: viewModel.updateFlashCard)
+//                FlashCardListView(flashcards: viewModel.flashcards,
+//                                  updateFlashCard:viewModel.updateFlashCard )
                 //                    FlashCardListView(viewModel: FlashCardListViewViewModel(flashCardViewModel: viewModel))
             //    }
                 .transition(.move(edge: .bottom)) // Move in from the right
@@ -100,3 +99,4 @@ struct FlashCardView_Previews: PreviewProvider {
  
     }
 }
+

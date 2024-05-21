@@ -11,10 +11,10 @@ struct FlashCardListView: View {
 
     @StateObject var viewModel: FlashCardListViewViewModel
     
-    init(flashcards: [FlashCard], updateFlashCard: @escaping (FlashCard)->Void) {
+    init(flashcards: [FlashCard], onFlashCardUpdate: @escaping (FlashCard)->Void) {
         self._viewModel = StateObject(wrappedValue:
                                         FlashCardListViewViewModel(flashcards: flashcards,
-                                                                   updateParentFlashCard: updateFlashCard))
+                                                                   updateParentFlashCard: onFlashCardUpdate))
     }
     
     
@@ -38,13 +38,15 @@ struct FlashCardListView: View {
                                     .multilineTextAlignment(.leading)
                                     .font(.subheadline)
                             }
+                           
                             Spacer()
                             Image(systemName: "pencil")
                                 .font(.title2)
                                 .onTapGesture {
-                                    viewModel.index = fc_index
+                                   viewModel.index = fc_index
                                     viewModel.isPresentingEditingView = true
-                                    viewModel.emptyFlashCard = viewModel.flashcards[fc_index]
+                                   viewModel.emptyFlashCard = viewModel.flashcards[fc_index]
+                              
                                 }
                         }
                     }
@@ -52,8 +54,8 @@ struct FlashCardListView: View {
             }
             .sheet(isPresented: $viewModel.isPresentingEditingView){
                 NavigationView{
-
-                    FlashCardEditView(viewModel: FlashCardEditViewViewModel(editingFlashCard:          viewModel.emptyFlashCard)
+                    FlashCardEditView(flashCard: viewModel.emptyFlashCard, onFlashCardUpdate: viewModel.updateFlashCardCallBackFunc
+                    
                     ).toolbar{
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
@@ -102,9 +104,9 @@ struct FlashCardListView_Previews: PreviewProvider {
         
         
         
-        //  NavigationView{
-        FlashCardListView(flashcards: viewModel.flashcards, updateFlashCard: {updateFlashCard in viewModel.updateFlashCard(flashCard: updateFlashCard)})
-        // }
+          NavigationView{
+        FlashCardListView(flashcards: viewModel.flashcards, onFlashCardUpdate: viewModel.updateFlashCard)
+        }
         
     }
 }
