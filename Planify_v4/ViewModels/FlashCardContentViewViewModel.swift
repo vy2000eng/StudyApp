@@ -10,7 +10,7 @@ import SwiftUI
 
 class FlashCardContentViewViewModel: ObservableObject {
 
-    var flashcard:FlashCard
+    @Published var flashcard:FlashCard
     @Published var isShowingFront:Bool
     var updateParent: (FlashCard) -> Void
     

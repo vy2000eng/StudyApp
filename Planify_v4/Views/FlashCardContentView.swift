@@ -25,6 +25,7 @@ struct FlashCardContentView: View {
                 Text(viewModel.flashcard.front)
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    
             } else {
                 Text("Definition")
                     .font(.title2)

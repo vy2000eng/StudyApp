@@ -13,27 +13,32 @@ struct FlashCardEditView: View {
     init(flashCard: FlashCard, onFlashCardUpdate: @escaping (FlashCard) -> Void) {
         self._viewModel = StateObject(wrappedValue: FlashCardEditViewViewModel(flashCard: flashCard, onFlashCardUpdate: onFlashCardUpdate))
     }
+    //@State var isEditting = false
+    
     
     var body: some View {
+        
+        
+        
+        
+        
         VStack(alignment: .leading) {
-            HStack {
-                 
-                if viewModel.isEditing {
-                    TextField("Enter term", text: $viewModel.flashCard.front)
-                        //.textFieldStyle(RoundedBorderTextFieldStyle())
-                       
-                } else {
-                    Text(viewModel.flashCard.front)
-                      
-
-                }
-            }  .font(.title)
+                VStack {
+                     
+                    if viewModel.saveEditState.isEditing {
+                        TextEditor( text: $viewModel.flashCard.front)
+                            .frame(minHeight: 1)
+                         
+                            
+                    } else {
+                        Text(viewModel.flashCard.front)
+                    }
+                }  
+                .font(.title)
                 .bold()
                 .multilineTextAlignment(.leading)
                 .padding([.leading, .trailing,.top])
-
-
-            
+     
             Rectangle()
                .frame(height: 2) // Adjust thickness here
                .foregroundColor(.black) // Set color to match a typical divider
@@ -43,8 +48,9 @@ struct FlashCardEditView: View {
             ScrollView(content: {
                 HStack {
                       
-                    if viewModel.isEditing {
-                        TextField("Enter definition", text: $viewModel.flashCard.back)
+                    if viewModel.saveEditState.isEditing {
+                        TextEditor(text: $viewModel.flashCard.back)
+                        .frame(minHeight: 200)
                     } else {
                         Text(viewModel.flashCard.back)
                     }
@@ -52,19 +58,60 @@ struct FlashCardEditView: View {
                 .padding([.leading,.trailing])
                 .font(.subheadline)
                 .multilineTextAlignment(.leading)
-
-                Button(viewModel.isEditing ? "save changes" : "edit", action: {
-                    if viewModel.isEditing {
-                                      // If currently editing, save changes
-                                      viewModel.saveChanges()
-                                  }
-                    viewModel.toggleIsEditting()
-       
-                })
                 
             })
-           
 
+
+        }.toolbar{
+            
+            ToolbarItem(placement: .confirmationAction, content: {
+                Button(  viewModel.saveEditState.isEditing ? "save" : "edit"){
+                    viewModel.saveEditState.clickCount += 1
+                    if viewModel.saveEditState.clickCount == 1{
+                        viewModel.saveEditState.isEditing = true
+                    }
+                    if viewModel.saveEditState.clickCount == 2{
+                        viewModel.saveEditState.onConfirm = true
+                    }
+                    
+                    //viewModel.isEditing = viewModel.isEditing ? false:true
+                   // viewModel.toggleIsEditting()
+                    
+               
+                    
+                }
+                .alert(isPresented: $viewModel.saveEditState.onConfirm) {
+                    Alert(
+                        title: Text("Current Location Not Available"),
+                        message: Text("Your current location can’t be " +
+                                      "determined at this time."),
+                        primaryButton: .default(
+                            Text("ok"),
+                            action: {
+                                viewModel.saveChanges()
+                                viewModel.resetSaveEditState()
+
+                                
+                            }
+                            
+                        ),
+                        secondaryButton: .destructive(
+                                      Text("Delete"),
+                                      action: {
+                                          
+                                          viewModel.saveChanges()
+                                          viewModel.resetSaveEditState()
+
+                                      }
+                                  )
+                        
+                    )
+                }
+                    
+                
+            })
+            
+            
         }
     }
 }
@@ -89,13 +136,17 @@ struct FlashCardEditView_Previews: PreviewProvider {
         let emptyCard = FlashCard(front: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
         
         // Setup for preview
-        var previewFlashCard = vm.emptyFlashCard
+        NavigationView{
+
+        var previewFlashCard = vm.edittingFlashCard
         if previewFlashCard.front.isEmpty && previewFlashCard.back.isEmpty {
             previewFlashCard = emptyCard
         }
-        
-        return FlashCardEditView(flashCard: previewFlashCard, onFlashCardUpdate:
-            vm.updateFlashCardCallBackFunc
-        )
+            return FlashCardEditView(flashCard: previewFlashCard, onFlashCardUpdate:
+                vm.updateFlashCardCallBackFunc
+            )
+            
+        }
+      
     }
 }

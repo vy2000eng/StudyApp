@@ -19,7 +19,7 @@ class FlashCardListViewViewModel: ObservableObject {
     @Published var index = 0
     @Published var flashcards: [FlashCard]
     var onFlashCardUpdate: (FlashCard) -> Void
-    @Published var emptyFlashCard = FlashCard()
+    var edittingFlashCard = FlashCard()
     @Published var isPresentingEditingView = false
 
     
@@ -32,8 +32,13 @@ class FlashCardListViewViewModel: ObservableObject {
     
     
     func updateFlashCardCallBackFunc(flashCard:FlashCard){
+        
+        isPresentingEditingView = false
         flashcards[index] = flashCard
         onFlashCardUpdate(flashCard)
+        print("updatesFlashCardCallBackFunc called")
+        print(flashcards[index])
+                //onFlashCardUpdate(flashCard)
     }
     
     

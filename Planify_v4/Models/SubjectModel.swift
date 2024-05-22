@@ -61,7 +61,9 @@ extension Subject{
     static var chem_arr = [
             FlashCard(front: "alkali metals", back: "he metals in the first periodic table column, minus hydrogen"),
             FlashCard(front: "allotropes", back: "all the different forms elements can exist in"),
-            FlashCard(front: "alloy", back: "imetal mixtures with multiple elements")
+            FlashCard(front: "alloy", back: "imetal mixtures with multiple elements"),
+            FlashCard(front: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
             ]
     static var trig_arr = [
             FlashCard(front: "sin", back: "sine"),
@@ -70,10 +72,14 @@ extension Subject{
             FlashCard(front: "cos", back: "cosecant"),
             FlashCard(front: "sec", back: "secant"),
             FlashCard(front: "cot", back: "cotangent"),
+            FlashCard(front: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
 
     ]
-    
+
     static var lit_arr = [
+        FlashCard(front: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+
             FlashCard(front: " Crime and Punishment", back: "Fyodor Dostoevsky"),
             FlashCard(front: "Pushkin", back: "The captains daughter"),
             FlashCard(front: "The Death of Ivan Ilyich ppppppppppppppppppppppppppppp", back: "Tolstoy")

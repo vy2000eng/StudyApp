@@ -9,9 +9,17 @@ import Foundation
 
 class FlashCardEditViewViewModel: ObservableObject{
   
-    @Published var flashCard : FlashCard
+     @Published var flashCard : FlashCard
     var onFlashCardUpdate: (FlashCard) ->Void
     @Published var isEditing = false
+    //@Published var confirm = false
+    struct editingState{
+        var isEditing: Bool = false
+        var onConfirm: Bool = false
+        var clickCount:Int = 0
+    }
+    
+    @Published var saveEditState = editingState()
     
 
     
@@ -38,8 +46,17 @@ class FlashCardEditViewViewModel: ObservableObject{
     }
     
     func saveChanges(){
-        onFlashCardUpdate(flashCard)
         
+        onFlashCardUpdate(flashCard)
+        print("onflashCardUodate in EditViewModel called")
+        print(flashCard)
+        
+    }
+    
+    func resetSaveEditState(){
+        saveEditState.clickCount = 0
+        saveEditState.isEditing = false
+        saveEditState.onConfirm = false
     }
     
     

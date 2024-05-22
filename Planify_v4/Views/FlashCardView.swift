@@ -19,71 +19,100 @@ struct FlashCardView: View {
     }
     
     var body: some View{
-        VStack(alignment: .center, spacing: 0){
+        TabView{
+            cardView.tabItem {
+                Label("Cards", systemImage: "square.stack")
+                
+            }
             
-            if !viewModel.isListView{
-                TabView(selection: $viewModel.index, content: {
-                    ForEach(
-                        viewModel.flashcards.indices, id: \.self,
-                        content: {
-                            fc_index in
-                            FlashCardContentView(
-                                flashCard:
-                                    viewModel.flashcards[fc_index],
-                                updateParent:{
-                                    updateFlashcard in viewModel.updateFlashCard(flashCard: updateFlashcard)
-                                })
-                        })
-                })
-                
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
-                .transition(.opacity) // Transition for TabView
-                .animation(.easeInOut, value: viewModel.isListView)
-                VStack(content: {
-                    FlashCardCollectionScrollView(
-                        flashcards: viewModel.flashcards,
-                        index: viewModel.index,
-                        updateIndex:
-                            {updateIndex in
-                                viewModel.updateIndex(idx: updateIndex)
-                    })
-                    .transition(.slide) // Add a sliding transition
-                    .animation(.easeInOut, value: viewModel.isListView)
-                })
-                
-            }
-            else{
-              //  NavigationView{
-
-                FlashCardListView(flashcards: viewModel.flashcards, onFlashCardUpdate: viewModel.updateFlashCard)
-//                FlashCardListView(flashcards: viewModel.flashcards,
-//                                  updateFlashCard:viewModel.updateFlashCard )
-                //                    FlashCardListView(viewModel: FlashCardListViewViewModel(flashCardViewModel: viewModel))
-            //    }
-                .transition(.move(edge: .bottom)) // Move in from the right
-                .animation(.easeInOut, value: viewModel.isListView)
-                
-            }
-        }.toolbar {
-            ToolbarItem(placement: .confirmationAction, content: {
-                Button(action:{
-                    withAnimation{
-                        viewModel.toggleListView()
-                    }
-                }) {
-                    viewModel.isListView ?
-                    Image(systemName: "list.bullet.rectangle.fill")
-                        .font(.title2):
-                    Image(systemName: "list.bullet.rectangle")
-                        .font(.title2)
-                }
+            FlashCardListView(flashcards:viewModel.flashcards, updateFlashCard:{
+                upfc in viewModel.updateFlashCard(flashCard: upfc)
             })
+                .tabItem{
+                    Label("List", systemImage: "list.bullet.rectangle.portrait")
+                    
+                }
+            
+            
         }
-        .environmentObject(viewModel)
-        
+        //cardView
         
     }
+    
+//    @ViewBuilder 
+//    var listView: some View{
+//        FlashCardListView(flashcards:viewModel.flashcards, updateFlashCard:{
+//            upfc in viewModel.updateFlashCard(flashCard: upfc)
+//        })
+//    }
+    
+    @ViewBuilder var cardView: some View{
+        VStack(alignment: .center, spacing: 0){
+            
+            //if !viewModel.isListView{
+            TabView(selection: $viewModel.index, content: {
+                ForEach(
+                    viewModel.flashcards.indices, id: \.self,
+                    content: {
+                        fc_index in
+                        FlashCardContentView(
+                            flashCard:
+                                viewModel.flashcards[fc_index],
+                            updateParent:{
+                                updateFlashcard in viewModel.updateFlashCard(flashCard: updateFlashcard)
+                            })
+                    })
+            })
+            
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+            .transition(.opacity) // Transition for TabView
+            .animation(.easeInOut, value: viewModel.isListView)
+            VStack(content: {
+                FlashCardCollectionScrollView(
+                    flashcards: viewModel.flashcards,
+                    index: viewModel.index,
+                    updateIndex:
+                        {updateIndex in
+                            viewModel.updateIndex(idx: updateIndex)
+                        })
+                .transition(.slide) // Add a sliding transition
+                .animation(.easeInOut, value: viewModel.isListView)
+            })
+        }
+    }
+                
+           // }
+//            else{
+//              //  NavigationView{
+//
+//                FlashCardListView(flashcards: viewModel.flashcards, updateFlashCard: viewModel.updateFlashCard)
+////                FlashCardListView(flashcards: viewModel.flashcards,
+////                                  updateFlashCard:viewModel.updateFlashCard )
+//                //                    FlashCardListView(viewModel: FlashCardListViewViewModel(flashCardViewModel: viewModel))
+//            //    }
+//                .transition(.move(edge: .bottom)) // Move in from the right
+//                .animation(.easeInOut, value: viewModel.isListView)
+//                
+//            }
+        
+//        .toolbar {
+//            ToolbarItem(placement: .confirmationAction, content: {
+//                Button(action:{
+//                    withAnimation{
+//                        viewModel.toggleListView()
+//                    }
+//                }) {
+//                    viewModel.isListView ?
+//                    Image(systemName: "list.bullet.rectangle.fill")
+//                        .font(.title2):
+//                    Image(systemName: "list.bullet.rectangle")
+//                        .font(.title2)
+//                }
+//            })
+//        }
+    
+    
 }
 
 struct FlashCardView_Previews: PreviewProvider {

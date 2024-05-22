@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class FlashCardViewViewModel: ObservableObject {
-    @Published  var flashcards:[FlashCard]
+    @Published var flashcards:[FlashCard]
     @Published  var index:Int
     @Published  var isListView:Bool
     
@@ -34,7 +34,11 @@ class FlashCardViewViewModel: ObservableObject {
     }
     
     func updateFlashCard(flashCard: FlashCard){
+        print("updateFlashCard Called")
+        print(flashCard)
+
         if let index = flashcards.firstIndex(where: {$0.id == flashCard.id}){
+            print(index)
             flashcards[index] = flashCard
             
         }

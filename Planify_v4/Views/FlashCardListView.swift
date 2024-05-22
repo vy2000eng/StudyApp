@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct FlashCardListView: View {
-
-    @StateObject var viewModel: FlashCardListViewViewModel
     
-    init(flashcards: [FlashCard], onFlashCardUpdate: @escaping (FlashCard)->Void) {
+    @StateObject var viewModel: FlashCardListViewViewModel
+    @State private var isShowingDetailView = false
+    
+    
+    init(flashcards: [FlashCard], updateFlashCard: @escaping (FlashCard)->Void) {
         self._viewModel = StateObject(wrappedValue:
                                         FlashCardListViewViewModel(flashcards: flashcards,
-                                                                   updateParentFlashCard: onFlashCardUpdate))
+                                                                   updateParentFlashCard: updateFlashCard))
     }
     
     
@@ -22,92 +24,148 @@ struct FlashCardListView: View {
     @State private var selectedTab = "One"
     
     var body: some View {
+        
+        
         VStack{
             List{
-                ForEach(viewModel.flashcards.indices,id: \.self) { fc_index in
+                ForEach(viewModel.flashcards) { $flashcard in
                     Section{
-                        HStack{
-                            VStack(alignment: .leading){
-                                Text(viewModel.flashcards[fc_index].front)
-                                    .multilineTextAlignment(.leading)
-                                    .bold()
-                                    .font(.title3)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                Text(viewModel.flashcards[fc_index].back)
-                                    .multilineTextAlignment(.leading)
-                                    .font(.subheadline)
-                            }
-                           
-                            Spacer()
-                            Image(systemName: "pencil")
-                                .font(.title2)
-                                .onTapGesture {
-                                   viewModel.index = fc_index
-                                    viewModel.isPresentingEditingView = true
-                                   viewModel.emptyFlashCard = viewModel.flashcards[fc_index]
-                              
+                        VStack(alignment: .leading){
+                            HStack(){
+                                VStack(alignment:.leading){
+                                    Text(flashcard.front)
+                                        .multilineTextAlignment(.leading)
+                                        .bold()
+                                        .font(.title3)
                                 }
+                                Spacer()
+                                
+                                VStack(alignment:.trailing){
+                                    
+                                    Button(action: {
+                                        viewModel.index = viewModel.flashcards.firstIndex(where: { $0.id == flashcard.id }) ?? -1
+                                        viewModel.isPresentingEditingView = true
+                                        viewModel.edittingFlashCard = flashcard
+                                        
+                                    }, label: {
+                                        Image(systemName: "pencil")
+                                            .bold()
+                                            .font(.title2)
+                                    })
+                                    
+                                    .frame(minWidth: 10,minHeight: 10)
+                                    .background( NavigationLink(destination:FlashCardEditView(flashCard: flashcard, onFlashCardUpdate:
+                                                                                                {upfc in viewModel.updateFlashCardCallBackFunc(flashCard: upfc)}
+                                                                                             )){
+                                        EmptyView()
+                                    }.opacity(0))
+                                }
+                            }
                         }
+                        Text(flashcard.back)
+                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
                     }
                 }
             }
-            .sheet(isPresented: $viewModel.isPresentingEditingView){
-                NavigationView{
-                    FlashCardEditView(flashCard: viewModel.emptyFlashCard, onFlashCardUpdate: viewModel.updateFlashCardCallBackFunc
-                    
-                    ).toolbar{
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
-                                viewModel.isPresentingEditingView = false
-                            }
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") {
-                                viewModel.isPresentingEditingView = false
-                            }
-
-                        }
-
-                    }
-
-                }
-            }
-            
-            
-            ////
-            ////
-            ///
-            ///
-            
-            ////
-            ////
-            ///
-            ///
-            
         }
+        
+        
+        
     }
 }
-
-        
-        
-        
-struct FlashCardListView_Previews: PreviewProvider {
-    //    @ObservedObject static var fcView = FlashCardViewViewModel(
-    //        flashcards: Subject.sampleData[1].flashcards)
-    //        @StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
-    //        @ObservedObject static var viewModel = FlashCardListViewViewModel(flashCardViewModel: fcViewModel)
-    @ObservedObject static var viewModel = FlashCardViewViewModel(
-        flashcards: Subject.sampleData[1].flashcards)
     
-    static var previews: some View {
+    
+    //@ViewBuilder
+//    var mainListView: some View {
+//        VStack{
+//            List{
+//                ForEach(viewModel.flashcards) { $flashcard in
+//                    Section{
+//                        VStack(alignment: .leading){
+//                            HStack(){
+//                                VStack(alignment:.leading){
+//                                    Text(flashcard.front)
+//                                        .multilineTextAlignment(.leading)
+//                                        .bold()
+//                                        .font(.title3)
+//                                }
+//                                Spacer()
+//                                
+//                                VStack(alignment:.trailing){
+//                                    
+//                                    Button(action: {
+//                                        viewModel.index = viewModel.flashcards.firstIndex(where: { $0.id == flashcard.id }) ?? -1
+//                                        viewModel.isPresentingEditingView = true
+//                                        viewModel.edittingFlashCard = flashcard
+//                                        
+//                                    }, label: {
+//                                        Image(systemName: "pencil")
+//                                            .bold()
+//                                            .font(.title2)
+//                                    })
+//                                    
+//                                    .frame(minWidth: 10,minHeight: 10)
+//                                    .background( NavigationLink(destination:FlashCardEditView(flashCard: flashcard, onFlashCardUpdate:
+//                                                                                                {upfc in viewModel.updateFlashCardCallBackFunc(flashCard: upfc)}
+//                                                                                             )){
+//                                        EmptyView()
+//                                    }.opacity(0))
+//                                }
+//                            }
+//                        }
+//                        Text(flashcard.back)
+//                            .multilineTextAlignment(.leading)
+//                            .font(.subheadline)
+//                    }
+//                }
+//            }
+//        }
+//        
+//    }
+//}
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    struct FlashCardListView_Previews: PreviewProvider {
+        //@ObservedObject static var fcView = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
+        @StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
+        //  @ObservedObject static var viewModel = FlashCardListViewViewModel(flashCardViewModel: fcViewModel)
+        
+        //    @State static var index = 0
+        //
+        //    @ObservedObject static var viewModel = FlashCardViewViewModel(
+        //        flashcards: Subject.sampleData[1].flashcards)
         
         
-        
-          NavigationView{
-        FlashCardListView(flashcards: viewModel.flashcards, onFlashCardUpdate: viewModel.updateFlashCard)
+        static var previews: some View {
+            //        FlashCardCollectionScrollView(
+            //        viewModel:          viewModel,
+            //        flashCardViewModel: fcView )
+            NavigationStack{
+                FlashCardListView(flashcards: fcViewModel.flashcards, updateFlashCard: fcViewModel.updateFlashCard)
+                
+                
+            }
+            //FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: index, updateIndex: {updateIndex in viewModel.updateIndex(idx: updateIndex)})
         }
         
+        
+        
     }
-}
+
+
+
+
     
