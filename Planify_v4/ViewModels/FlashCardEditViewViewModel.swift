@@ -32,20 +32,21 @@ class FlashCardEditViewViewModel: ObservableObject{
     func toggleIsEditting(){
         isEditing.toggle()
     }
+//    
+//    func updateFront(front:String){
+//        flashCard.front = front
+//        saveChanges()
+//
+//    }
+//    
+//    func updateBack(back:String){
+//        flashCard.back = back
+//        saveChanges()
+//
+//    }
     
-    func updateFront(front:String){
-        flashCard.front = front
-        saveChanges()
-
-    }
-    
-    func updateBack(back:String){
-        flashCard.back = back
-        saveChanges()
-
-    }
-    
-    func saveChanges(){
+    func saveChanges(flashcard:FlashCard){
+        resetSaveEditState()
         
         onFlashCardUpdate(flashCard)
         print("onflashCardUodate in EditViewModel called")

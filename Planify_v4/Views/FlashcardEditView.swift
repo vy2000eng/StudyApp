@@ -88,8 +88,8 @@ struct FlashCardEditView: View {
                         primaryButton: .default(
                             Text("ok"),
                             action: {
-                                viewModel.saveChanges()
-                                viewModel.resetSaveEditState()
+                                viewModel.saveChanges(flashcard: viewModel.flashCard)
+                               // viewModel.resetSaveEditState()
 
                                 
                             }
@@ -99,8 +99,8 @@ struct FlashCardEditView: View {
                                       Text("Delete"),
                                       action: {
                                           
-                                          viewModel.saveChanges()
-                                          viewModel.resetSaveEditState()
+                                          viewModel.saveChanges(flashcard: viewModel.flashCard)
+                                        //  viewModel.resetSaveEditState()
 
                                       }
                                   )
@@ -120,7 +120,7 @@ struct FlashCardEditView: View {
 struct FlashCardEditView_Previews: PreviewProvider {
     
     @ObservedObject static var fcVm = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
-    @ObservedObject static var vm = FlashCardListViewViewModel(flashcards:Subject.sampleData[1].flashcards,updateParentFlashCard: {updatefc in fcVm.updateFlashCard(flashCard: updatefc)});
+    @ObservedObject static var vm = FlashCardListViewViewModel(flashcards:Subject.sampleData[1].flashcards,updateParentFlashCard: {updatefc in fcVm.updateFlashCard(flashcard: updatefc)});
 //                                                               updateParentFlashCard: {fc in }))
     
     
@@ -130,7 +130,7 @@ struct FlashCardEditView_Previews: PreviewProvider {
         let sampleFlashcards = Subject.sampleData[1].flashcards
         let fcVm = FlashCardViewViewModel(flashcards: sampleFlashcards)
         let vm = FlashCardListViewViewModel(flashcards: sampleFlashcards, updateParentFlashCard: { updatefc in
-            fcVm.updateFlashCard(flashCard: updatefc)
+            fcVm.updateFlashCard(flashcard: updatefc)
         })
 
         let emptyCard = FlashCard(front: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", back: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")

@@ -15,7 +15,7 @@ struct FlashCardView: View {
     @StateObject var viewModel: FlashCardViewViewModel
     init(flashcards: [FlashCard]) {
         self._viewModel =
-        StateObject(wrappedValue: FlashCardViewViewModel(flashcards: flashcards))
+        StateObject(wrappedValue:  FlashCardViewViewModel(flashcards: flashcards))
     }
     
     var body: some View{
@@ -25,9 +25,7 @@ struct FlashCardView: View {
                 
             }
             
-            FlashCardListView(flashcards:viewModel.flashcards, updateFlashCard:{
-                upfc in viewModel.updateFlashCard(flashCard: upfc)
-            })
+            FlashCardListView(flashcards:viewModel.flashcards, updateFlashCard: viewModel.updateFlashCard)
                 .tabItem{
                     Label("List", systemImage: "list.bullet.rectangle.portrait")
                     
@@ -59,7 +57,7 @@ struct FlashCardView: View {
                             flashCard:
                                 viewModel.flashcards[fc_index],
                             updateParent:{
-                                updateFlashcard in viewModel.updateFlashCard(flashCard: updateFlashcard)
+                                updateFlashcard in viewModel.updateFlashCard(flashcard: updateFlashcard)
                             })
                     })
             })
