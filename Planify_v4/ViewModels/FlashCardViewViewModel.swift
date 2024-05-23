@@ -13,6 +13,7 @@ class FlashCardViewViewModel: ObservableObject {
     @Published  var index:Int
     @Published  var isListView:Bool
     @Published var aBool = false
+    @Published var selectedTab = 0
     
     
     init(flashcards: [FlashCard], index: Int = 0, isListView: Bool = false) {
@@ -35,15 +36,13 @@ class FlashCardViewViewModel: ObservableObject {
     }
     
     func updateFlashCard(flashcard : FlashCard){
-        print("updateFlashCard Called")
-        print(flashcard)
+      //  print("updateFlashCard Called")
+       // print(flashcard)
 
         if let index = flashcards.firstIndex(where: {$0.id == flashcard.id}){
-            print(index)
-            objectWillChange.send()
+       
             flashcards[index] = flashcard
-            print("Flashcards updated: \(flashcards)")
-            aBool.toggle()
+       
 
             
         }
