@@ -24,7 +24,6 @@ class FlashCardContentViewViewModel: ObservableObject {
     
     func toggleIsShowingFront(){
         isShowingFront.toggle()
-       // saveChanges()
     }
     
     func updateFront(front:String){
@@ -44,7 +43,4 @@ class FlashCardContentViewViewModel: ObservableObject {
         updateParent(flashcard)
     }
     
-
-    
-
 }

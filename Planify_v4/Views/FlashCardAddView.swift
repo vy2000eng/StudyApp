@@ -54,16 +54,6 @@ struct FlashCardAddView: View {
                 }
             })
         }
-//        .toolbar{
-//            ToolbarItem(placement: .confirmationAction, content: {
-//                Button(action: {
-//                    dismiss()
-//                }, label: {
-//                    Text("Done")
-//                })
-//            })
-//            
-//        }
     }
 }
 

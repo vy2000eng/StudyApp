@@ -54,8 +54,6 @@ struct FlashCardEditViewHelper: View {
                 }
             })
         }
-        
-        
     }
     
     

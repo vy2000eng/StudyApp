@@ -9,15 +9,11 @@ import SwiftUI
 
 struct FlashCardCollectionScrollView: View {
     
-//    @StateObject var viewModel            : FlashCardCollectionScrollViewViewModel
-//    @ObservedObject var flashCardViewModel: FlashCardViewViewModel
-    
     @StateObject var viewModel: FlashCardCollectionScrollViewViewModel
     init(flashcards:[FlashCard],index:Int ,updateIndex: @escaping(Int)->Void){
         self._viewModel = StateObject(wrappedValue: FlashCardCollectionScrollViewViewModel(titles: flashcards, index: index,updateIndex: updateIndex))
         
     }
-    
     
     var body: some View {
         VStack{
@@ -59,9 +55,7 @@ struct FlashCardCollectionScrollView_Previews: PreviewProvider {
     
     
     static var previews: some View {
-//        FlashCardCollectionScrollView(
-//        viewModel:          viewModel,
-//        flashCardViewModel: fcView )
+
         FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: index, updateIndex: {updateIndex in viewModel.updateIndex(idx: updateIndex)})
     }
 }

@@ -45,7 +45,6 @@ struct FlashCardContentView: View {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.4)) {
                 viewModel.toggleIsShowingFront()
             }
-           // viewModel.updateFront(front: "bye")
             
         }
         

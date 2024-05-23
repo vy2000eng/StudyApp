@@ -9,13 +9,7 @@ import SwiftUI
 
 
 class FlashCardListViewViewModel: ObservableObject {
-//    @Published  var subject:Subject
-//
-//    init(subject: Subject) {
-//        self.subject = subject
-//    }
-  //  @Published var flashCardViewModel: FlashCardViewViewModel
-    //@Published var editingFlashCard = FlashCard(front: "", back:"" )
+
     @Published var index = 0
     @Published var flashcards: [FlashCard]
     var onFlashCardUpdate: (FlashCard) -> Void
@@ -23,35 +17,17 @@ class FlashCardListViewViewModel: ObservableObject {
     @Published var isPresentingEditingView = false
     @Published var isPresentingAddView = false
     
-
     
     init(flashcards: [FlashCard], updateParentFlashCard: @escaping(FlashCard) ->Void ){
         self.onFlashCardUpdate = updateParentFlashCard
         self.flashcards = flashcards
     }
     
-    
-    
-    
     func updateFlashCardCallBackFunc(flashCard:FlashCard){
-        
         isPresentingEditingView = false
         flashcards[index] = flashCard
         onFlashCardUpdate(flashCard)
         print("updatesFlashCardCallBackFunc called")
         print(flashcards[index])
-                //onFlashCardUpdate(flashCard)
     }
-    
-    
-    
-    
-//    init(flashCardViewModel: FlashCardViewViewModel) {
-//        self.flashCardViewModel = flashCardViewModel
-//    }
-
-    
-
-    
-
 }

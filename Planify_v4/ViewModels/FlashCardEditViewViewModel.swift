@@ -9,10 +9,9 @@ import Foundation
 
 class FlashCardEditViewViewModel: ObservableObject{
   
-     @Published var flashCard : FlashCard
+    @Published var flashCard : FlashCard
     var onFlashCardUpdate: (FlashCard) ->Void
     @Published var isEditing = false
-    //@Published var confirm = false
     struct editingState{
         var isEditing: Bool = false
         var onConfirm: Bool = false
@@ -20,10 +19,7 @@ class FlashCardEditViewViewModel: ObservableObject{
     }
     
     @Published var saveEditState = editingState()
-    
 
-    
-    
     init(flashCard: FlashCard, onFlashCardUpdate: @escaping (FlashCard)->Void) {
         self.flashCard = flashCard
         self.onFlashCardUpdate = onFlashCardUpdate
@@ -32,26 +28,12 @@ class FlashCardEditViewViewModel: ObservableObject{
     func toggleIsEditting(){
         isEditing.toggle()
     }
-//    
-//    func updateFront(front:String){
-//        flashCard.front = front
-//        saveChanges()
-//
-//    }
-//    
-//    func updateBack(back:String){
-//        flashCard.back = back
-//        saveChanges()
-//
-//    }
     
     func saveChanges(flashcard:FlashCard){
         resetSaveEditState()
-        
         onFlashCardUpdate(flashCard)
         print("onflashCardUodate in EditViewModel called")
         print(flashCard)
-        
     }
     
     func resetSaveEditState(){
@@ -59,18 +41,4 @@ class FlashCardEditViewViewModel: ObservableObject{
         saveEditState.isEditing = false
         saveEditState.onConfirm = false
     }
-    
-    
-//    @Published var fcViewModel: FlashCardViewViewModel
-//    @Published var index : Int
-//
-//    //@Published var flashCard: FlashCard
-//
-//
-//
-//    init(fcViewModel: FlashCardViewViewModel, index: Int) {
-//        self.fcViewModel = fcViewModel
-//        self.index = index
-//    }
-    
 }

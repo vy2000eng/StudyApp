@@ -25,15 +25,6 @@ class SubjectDetailsViewViewModel: ObservableObject {
     }
 
 
-//    var subject:Subject
-//
-//    init(subject: Subject) {
-//        self.subject = subject
-//    }
-
-       // self.subject = subject
-    
-
     
 
     

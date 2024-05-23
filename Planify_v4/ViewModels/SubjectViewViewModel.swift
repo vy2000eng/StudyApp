@@ -21,13 +21,10 @@ class SubjectViewViewModel: ObservableObject{
     }
     
     func updateSubject(subject: Subject) {
-        //self.index = index
            if let index = subjects.firstIndex(where: { $0.id == subject.id }) {
                subjects[index] = subject
            }
        }
     
-//    init() {
-//        self.subjects = Subject.sampleData
-//    }
+
 }
