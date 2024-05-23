@@ -17,48 +17,66 @@ struct FlashCardEditView: View {
     
     
     var body: some View {
-    
-        VStack(alignment: .leading) {
+        Form{
+            VStack(alignment: .leading) {
                 VStack {
-                     
                     if viewModel.saveEditState.isEditing {
-                        TextEditor( text: $viewModel.flashCard.front)
-                            .frame(minHeight: 1)
-                         
-                            
+                        Text(viewModel.flashCard.front).foregroundColor(.clear).padding(8)
+                            .frame(maxWidth: .infinity)
+                                           .overlay(
+                                               TextEditor(text: $viewModel.flashCard.front)
+                                           )
+                                           .frame(minHeight: 20.0)
+//                        TextEditor( text: $viewModel.flashCard.front)
+//                          .frame(minHeight: 200)
                     } else {
                         Text(viewModel.flashCard.front)
-                    }
-                }  
-                .font(.title)
-                .bold()
-                .multilineTextAlignment(.leading)
-                .padding([.leading, .trailing,.top])
-     
-            Rectangle()
-               .frame(height: 2) // Adjust thickness here
-               .foregroundColor(.black) // Set color to match a typical divider
-               .opacity(0.5)
-               .padding([.leading, .trailing])
-            
-            ScrollView(content: {
-                HStack {
-                      
-                    if viewModel.saveEditState.isEditing {
-                        TextEditor(text: $viewModel.flashCard.back)
-                        .frame(minHeight: 200)
-                    } else {
-                        Text(viewModel.flashCard.back)
+                            .fixedSize(horizontal: false, vertical: true) // Expand vertically based on content
                     }
                 }
-                .padding([.leading,.trailing])
-                .font(.subheadline)
-                .multilineTextAlignment(.leading)
+                .font(.title)
+                .bold()
+               // .multilineTextAlignment(.leading)
+                .padding([.leading, .trailing,.top])
+                Rectangle()
+                    .frame(height: 2) // Adjust thickness here
+                    .foregroundColor(.black) // Set color to match a typical divider
+                    .opacity(0.5)
+                    .padding([.leading, .trailing])
                 
-            })
+                ScrollView(content: {
+                    HStack {
+                        
+                        if viewModel.saveEditState.isEditing {
 
+                            Text(viewModel.flashCard.back).foregroundColor(.clear).padding(8)
+                                .frame(maxWidth: .infinity)
+                                               .overlay(
+                                                   TextEditor(text: $viewModel.flashCard.back)
+                                               )
+                                               .frame(minHeight: 20.0)
+                         
+                      
+                            
+                                //.frame(minHeight: 400)
+                        } else {
+                            Text(viewModel.flashCard.back)
+                                .fixedSize(horizontal: false, vertical: true) // Expand vertically based on content
 
-        }.toolbar{
+                        }
+                    }
+                    .padding(.horizontal)
+                    .font(.subheadline)
+                })
+                
+                
+            }
+        }
+        .font(.system(size: 18, weight: .bold, design: .default))
+        .lineLimit(nil)
+        .scaleEffect(viewModel.saveEditState.isEditing ? 1.1 : 1.0) // Slightly enlarge text when editing
+        
+        .toolbar{
             
             ToolbarItem(placement: .confirmationAction, content: {
                 Button(  viewModel.saveEditState.isEditing ? "save" : "edit"){
