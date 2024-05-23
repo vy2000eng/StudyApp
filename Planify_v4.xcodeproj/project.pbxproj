@@ -29,6 +29,7 @@
 		39C24EF22BE426350013F78C /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C24EF12BE426350013F78C /* SubjectView.swift */; };
 		39C24EF42BE47DB60013F78C /* SubjectViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C24EF32BE47DB60013F78C /* SubjectViewViewModel.swift */; };
 		39C24EF72BE4811E0013F78C /* SubjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C24EF62BE4811E0013F78C /* SubjectDetailsView.swift */; };
+		39E195552BFFF45D00CFF8E3 /* FlashCardEditViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E195542BFFF2A100CFF8E3 /* FlashCardEditViewHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		39C24EF12BE426350013F78C /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
 		39C24EF32BE47DB60013F78C /* SubjectViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewViewModel.swift; sourceTree = "<group>"; };
 		39C24EF62BE4811E0013F78C /* SubjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailsView.swift; sourceTree = "<group>"; };
+		39E195542BFFF2A100CFF8E3 /* FlashCardEditViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardEditViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		39C24EE62BE418F70013F78C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				39E1954E2BFFF15800CFF8E3 /* HelperViews */,
 				39C24EF12BE426350013F78C /* SubjectView.swift */,
 				39C24EF62BE4811E0013F78C /* SubjectDetailsView.swift */,
 				39389CF42BFC156500DAB28B /* FlashCardView.swift */,
@@ -151,6 +154,14 @@
 				39C24ED72BE418AF0013F78C /* Planify_v4App.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		39E1954E2BFFF15800CFF8E3 /* HelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				39E195542BFFF2A100CFF8E3 /* FlashCardEditViewHelper.swift */,
+			);
+			path = HelperViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +252,7 @@
 				391BC70B2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift in Sources */,
 				3944F9652BEE700800CDA742 /* FlashCardContentView.swift in Sources */,
 				39C13B562BFEEC010054E500 /* FlashCardAddView.swift in Sources */,
+				39E195552BFFF45D00CFF8E3 /* FlashCardEditViewHelper.swift in Sources */,
 				39C13B542BFEA06D0054E500 /* FlashCardListView.swift in Sources */,
 				39C24ED82BE418AF0013F78C /* Planify_v4App.swift in Sources */,
 			);
