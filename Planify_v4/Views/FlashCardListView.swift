@@ -24,18 +24,19 @@ struct FlashCardListView: View {
     
     
     
-   // @State private var selectedTab = "One"
+    // @State private var selectedTab = "One"
     
-
+    
     
     var body: some View{
         
-        VStack{
+        //VStack{
+       // NavigationView{
             List{
-                ForEach($viewModel.flashcards) { $flashcard in
+                ForEach( $viewModel.flashcards, id: \.id) { $flashcard in
                     Section{
                         VStack(alignment: .leading){
-                            HStack(){
+                            HStack{
                                 VStack(alignment:.leading){
                                     Text(flashcard.front)
                                         .multilineTextAlignment(.leading)
@@ -71,18 +72,50 @@ struct FlashCardListView: View {
                             .font(.subheadline)
                     }
                 }
-            }
-        }
-        
-        
-        
+          //  }
+      
+
+           // }
+     
+            //.navigationViewStyle() // This sets the navigation view to a specific style that might behave more consistently.
+            
+            //.navigationBarTitle( displayMode: .inline)
+//            .navigationBarItems(trailing:
+//                                    Button(action: {
+//                viewModel.isPresentingAddView = true
+//            }) {
+//                Image(systemName: "plus.square.on.square").font(.title2)
+//            })
+//            .edgesIgnoringSafeArea(.top)
+//            .sheet(isPresented: $viewModel.isPresentingAddView) {
+//                                       FlashCardAddView()
+//                //                    }
+//                //            .toolbar {
+//                //                        ToolbarItem(placement: .navigationBarTrailing) {
+//                //                            Button(action: {
+//                //                                viewModel.isPresentingAddView = true
+//                //                            }) {
+//                //                                Image(systemName: "plus.square.on.square")
+//                //                                    .font(.title2)
+//                //                                    .foregroundColor(.blue)
+//                //                                    .padding(4)
+//                //                            }
+//                //                        }
+//                //                    }
+//                //                    .sheet(isPresented: $viewModel.isPresentingAddView) {
+//                //                        FlashCardAddView()
+//                //                    }
+//                
+//            }
+            
+        }    
     }
-}
-    
-
     
     
-
+    
+    
+    
+    
     
     
     
@@ -108,7 +141,7 @@ struct FlashCardListView: View {
             //        FlashCardCollectionScrollView(
             //        viewModel:          viewModel,
             //        flashCardViewModel: fcView )
-            NavigationStack{
+            NavigationView{
                 FlashCardListView(flashcards: fcViewModel.flashcards, updateFlashCard: fcViewModel.updateFlashCard)
                 
                 
@@ -119,8 +152,9 @@ struct FlashCardListView: View {
         
         
     }
-
-
-
-
     
+    
+    
+    
+    
+}

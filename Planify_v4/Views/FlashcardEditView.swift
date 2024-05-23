@@ -17,11 +17,7 @@ struct FlashCardEditView: View {
     
     
     var body: some View {
-        
-        
-        
-        
-        
+    
         VStack(alignment: .leading) {
                 VStack {
                      

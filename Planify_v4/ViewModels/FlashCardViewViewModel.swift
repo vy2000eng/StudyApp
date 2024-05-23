@@ -14,6 +14,8 @@ class FlashCardViewViewModel: ObservableObject {
     @Published  var isListView:Bool
     @Published var aBool = false
     @Published var selectedTab = 0
+    @Published var isPresentingAddView = false
+
     
     
     init(flashcards: [FlashCard], index: Int = 0, isListView: Bool = false) {

@@ -21,6 +21,8 @@ class FlashCardListViewViewModel: ObservableObject {
     var onFlashCardUpdate: (FlashCard) -> Void
     var edittingFlashCard = FlashCard()
     @Published var isPresentingEditingView = false
+    @Published var isPresentingAddView = false
+    
 
     
     init(flashcards: [FlashCard], updateParentFlashCard: @escaping(FlashCard) ->Void ){

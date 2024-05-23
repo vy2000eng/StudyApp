@@ -19,6 +19,7 @@
 		3944F9632BEC92BD00CDA742 /* FlashCardViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F9622BEC92BD00CDA742 /* FlashCardViewViewModel.swift */; };
 		3944F9652BEE700800CDA742 /* FlashCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3944F9642BEE700800CDA742 /* FlashCardContentView.swift */; };
 		39C13B542BFEA06D0054E500 /* FlashCardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C13B532BFEA06D0054E500 /* FlashCardListView.swift */; };
+		39C13B562BFEEC010054E500 /* FlashCardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C13B552BFEEC010054E500 /* FlashCardAddView.swift */; };
 		39C24ED82BE418AF0013F78C /* Planify_v4App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C24ED72BE418AF0013F78C /* Planify_v4App.swift */; };
 		39C24EDC2BE418B60013F78C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C24EDB2BE418B60013F78C /* Assets.xcassets */; };
 		39C24EDF2BE418B60013F78C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39C24EDE2BE418B60013F78C /* Preview Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		3944F9622BEC92BD00CDA742 /* FlashCardViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardViewViewModel.swift; sourceTree = "<group>"; };
 		3944F9642BEE700800CDA742 /* FlashCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardContentView.swift; sourceTree = "<group>"; };
 		39C13B532BFEA06D0054E500 /* FlashCardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardListView.swift; sourceTree = "<group>"; };
+		39C13B552BFEEC010054E500 /* FlashCardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardAddView.swift; sourceTree = "<group>"; };
 		39C24ED42BE418AF0013F78C /* Planify_v4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planify_v4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C24ED72BE418AF0013F78C /* Planify_v4App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planify_v4App.swift; sourceTree = "<group>"; };
 		39C24EDB2BE418B60013F78C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				391BC70A2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift */,
 				39C13B532BFEA06D0054E500 /* FlashCardListView.swift */,
 				392143BB2BF531A200E70C4F /* FlashcardEditView.swift */,
+				39C13B552BFEEC010054E500 /* FlashCardAddView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				390002CB2BF28C3E0082EF8B /* FlashCardListViewViewModel.swift in Sources */,
 				391BC70B2BEEAF7C00C72114 /* FlashCardCollectionScrollView.swift in Sources */,
 				3944F9652BEE700800CDA742 /* FlashCardContentView.swift in Sources */,
+				39C13B562BFEEC010054E500 /* FlashCardAddView.swift in Sources */,
 				39C13B542BFEA06D0054E500 /* FlashCardListView.swift in Sources */,
 				39C24ED82BE418AF0013F78C /* Planify_v4App.swift in Sources */,
 			);

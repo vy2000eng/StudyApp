@@ -13,18 +13,44 @@ struct FlashCardView: View {
    // @StateObject var viewModel = FlashCardViewViewModel(
     //var flashCards : Flashcard
     @StateObject var viewModel: FlashCardViewViewModel
+    @State var isPresenetingAddView = false
     init(flashcards: [FlashCard]) {
         self._viewModel =
         StateObject(wrappedValue:  FlashCardViewViewModel(flashcards: flashcards))
     }
     
     var body: some View{
-        TabView(selection: $viewModel.selectedTab){
-            cardView.tabItem {  Label("Cards", systemImage: "square.stack") }.tag(0)
-            listView.tabItem {  Label("List", systemImage: "list.bullet.rectangle.portrait") }.tag(1)
+        NavigationView{
             
+            
+            TabView(selection: $viewModel.selectedTab){
+                cardView.tabItem {  Label("Cards", systemImage: "square.stack") }.tag(0)
+                //NavigationView{
+                listView.tabItem {  Label("List", systemImage: "list.bullet.rectangle.portrait") }.tag(1)
+                
+            }
+            .id(viewModel.selectedTab)
+
         }
-        .id(viewModel.selectedTab)
+       // .navigationBarTitleDisplayMode(.inline)
+
+        .toolbar {
+            ToolbarItem {
+                Button(action: {
+                    viewModel.isPresentingAddView = true
+                }) {
+                    Image(systemName: "plus.square.on.square")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                        .padding(4)
+                }
+            }
+        }
+        .sheet(isPresented: $viewModel.isPresentingAddView) {
+            FlashCardAddView()
+        }
+       
+        
 
         
     }
