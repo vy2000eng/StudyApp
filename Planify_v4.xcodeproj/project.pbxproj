@@ -121,7 +121,6 @@
 		39C24EE62BE418F70013F78C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				39E1954E2BFFF15800CFF8E3 /* HelperViews */,
 				39C24EF12BE426350013F78C /* SubjectView.swift */,
 				39C24EF62BE4811E0013F78C /* SubjectDetailsView.swift */,
 				39389CF42BFC156500DAB28B /* FlashCardView.swift */,
@@ -130,6 +129,7 @@
 				39C13B532BFEA06D0054E500 /* FlashCardListView.swift */,
 				392143BB2BF531A200E70C4F /* FlashcardEditView.swift */,
 				39C13B552BFEEC010054E500 /* FlashCardAddView.swift */,
+				39E1954E2BFFF15800CFF8E3 /* HelperViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
