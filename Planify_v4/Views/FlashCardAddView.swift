@@ -10,9 +10,23 @@ import SwiftUI
 struct FlashCardAddView: View {
     @Environment(\.dismiss) private var dismiss
     
+    
     @State var flashcard = FlashCard()
     @State var isEditingFront = false
     @State var isEditingBack = false
+    
+    var onInsert: (FlashCard) -> Void
+    
+    init(insertFlashCardCallBack: @escaping (FlashCard)->Void){
+        onInsert = insertFlashCardCallBack
+        
+    }
+    
+    func triggerInsertFlashCardCallBack(flashcard: FlashCard){
+        
+        onInsert(flashcard)
+        
+    }
     
     
     
@@ -22,8 +36,9 @@ struct FlashCardAddView: View {
                 TextField(text:$flashcard.front, label: {
                     Text("Term")
                 })
-                .onChange(of: flashcard.front) { newValue in
+                .onTapGesture{
                     isEditingFront = true
+                    isEditingBack = false
                 }
             }else{
                 TextEditor(text: $flashcard.front)
@@ -32,8 +47,10 @@ struct FlashCardAddView: View {
                 TextField(text:$flashcard.back, label: {
                     Text("Defintion")
                 })
-                .onChange(of: flashcard.back) { newValue in
+                .onTapGesture {
+                
                     isEditingBack = true
+                    isEditingFront = false
                 }
             }else{
                 TextEditor(text: $flashcard.back)
@@ -42,6 +59,7 @@ struct FlashCardAddView: View {
             Button(action: {
                 isEditingBack = false
                 isEditingFront = false
+                triggerInsertFlashCardCallBack(flashcard: flashcard)
                 dismiss()
             },
                    label: {
@@ -59,7 +77,14 @@ struct FlashCardAddView: View {
 
 #Preview {
     NavigationView{
-        FlashCardAddView()
+        @State  var flashCards = Subject.sampleData[0].flashcards
+        var subjects = Subject.sampleData
+
+        @ObservedObject var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+        @ObservedObject var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+        @ObservedObject var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
+       // @StateObject  var parentViewModel = FlashCardViewViewModel(flashcards: flashCards)
+        FlashCardAddView(insertFlashCardCallBack: childViewModel.insertFlashCard)
 
         
     }

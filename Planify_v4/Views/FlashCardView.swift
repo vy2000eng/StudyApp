@@ -13,9 +13,11 @@ struct FlashCardView: View {
 
     @StateObject var viewModel: FlashCardViewViewModel
     @State var isPresenetingAddView = false
-    init(flashcards: [FlashCard]) {
+    init(flashcards: [FlashCard], onFlashCardsUpdate: @escaping ([FlashCard])->Void) {
         self._viewModel =
-        StateObject(wrappedValue:  FlashCardViewViewModel(flashcards: flashcards))
+        StateObject(wrappedValue: 
+                        FlashCardViewViewModel(flashcards: flashcards, flashCardUpdateCallBack: onFlashCardsUpdate)
+        )
     }
     
     
@@ -29,10 +31,14 @@ struct FlashCardView: View {
 
 struct FlashCardView_Previews: PreviewProvider {
     
-    @ObservedObject  static var viewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[0].flashcards)
+    static var subjects = Subject.sampleData
+    
+    @ObservedObject static var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject static var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+    //@StateObject  static var viewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject, flashCardUpdateCallBack: parentViewModel.updateSubject)
     static var previews: some View {
         NavigationStack{
-            FlashCardView(flashcards: viewModel.flashcards)
+            FlashCardView(flashcards: parentViewModel.subject.flashcards, onFlashCardsUpdate: parentViewModel.saveFlashCards)
         }
     }
 }

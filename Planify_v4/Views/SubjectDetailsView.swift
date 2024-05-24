@@ -21,7 +21,7 @@ struct SubjectDetailsView: View {
                 VStack{
                     List{
                         Section{
-                            NavigationLink(destination: FlashCardView(flashcards: viewModel.subject.flashcards)){
+                            NavigationLink(destination: FlashCardView(flashcards: viewModel.subject.flashcards,onFlashCardsUpdate: viewModel.saveFlashCards)){
                                 Text("Flashcards")
                                     .font(.callout)
                                     .foregroundColor(.secondary)

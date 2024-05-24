@@ -107,7 +107,13 @@ struct FlashCardEditViewHelper: View {
     
     @State  var flashCards = Subject.sampleData[0].flashcards
     
-    @StateObject  var grandParentViewModel = FlashCardViewViewModel(flashcards: flashCards)
+    var subjects = Subject.sampleData
+
+    @ObservedObject  var greatGreatGrandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject  var greatGrandParentViewModel = SubjectDetailsViewViewModel(subject: greatGreatGrandParentViewModel.subjects[0], updateParent: greatGreatGrandParentViewModel.updateSubject)
+   // @ObservedObject static var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
+    
+    @StateObject  var grandParentViewModel = FlashCardViewViewModel(flashcards: flashCards, flashCardUpdateCallBack: greatGrandParentViewModel.saveFlashCards)
     
     @StateObject  var parentViewModel = FlashCardListViewViewModel(flashcards: grandParentViewModel.flashcards, updateParentFlashCard: grandParentViewModel.updateFlashCard)
     

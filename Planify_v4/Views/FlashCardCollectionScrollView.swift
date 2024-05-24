@@ -50,12 +50,21 @@ struct FlashCardCollectionScrollView: View {
 struct FlashCardCollectionScrollView_Previews: PreviewProvider {
     @State static var index = 0
 
-    @ObservedObject static var viewModel = FlashCardViewViewModel(
-        flashcards: Subject.sampleData[1].flashcards)
+    
+    
+    static var subjects = Subject.sampleData
+
+    @ObservedObject static var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject static var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+    @ObservedObject static var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
+    
+    
+//    @ObservedObject static var viewModel = FlashCardViewViewModel(
+//        flashcards: Subject.sampleData[1].flashcards)
     
     
     static var previews: some View {
 
-        FlashCardCollectionScrollView(flashcards: viewModel.flashcards, index: index, updateIndex: {updateIndex in viewModel.updateIndex(idx: updateIndex)})
+        FlashCardCollectionScrollView(flashcards: childViewModel.flashcards, index: index, updateIndex: childViewModel.updateIndex)
     }
 }

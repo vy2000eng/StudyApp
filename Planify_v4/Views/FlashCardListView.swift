@@ -66,10 +66,17 @@ struct FlashCardListView: View {
     }
 }
 struct FlashCardListView_Previews: PreviewProvider {
-    @StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
+    
+    static var subjects = Subject.sampleData
+
+    @ObservedObject static var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject static var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+    @ObservedObject static var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
+    
+    //@StateObject static var fcViewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
     static var previews: some View {
         NavigationView{
-            FlashCardListView(flashcards: fcViewModel.flashcards, updateFlashCard: fcViewModel.updateFlashCard)
+            FlashCardListView(flashcards: childViewModel.flashcards, updateFlashCard: childViewModel.updateFlashCard)
         }
     }
 }

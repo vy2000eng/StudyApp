@@ -55,13 +55,18 @@ struct FlashCardContentView: View {
 
 
 struct FlashCardContentView_Previews: PreviewProvider {
+    
+    
+    static var subjects = Subject.sampleData
 
-    @ObservedObject static var viewModel = FlashCardViewViewModel(flashcards: Subject.sampleData[0].flashcards)
+    @ObservedObject static var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject static var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+    @ObservedObject static var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
     
     
     static var previews: some View {
-        FlashCardContentView(flashCard: viewModel.flashcards[0],
-                             updateParent:{ updatedFlashCard in
-            viewModel.updateFlashCard(flashcard: updatedFlashCard)})
+        FlashCardContentView(flashCard: childViewModel.flashcards[0],
+                             updateParent:
+            childViewModel.updateFlashCard)
     }
 }

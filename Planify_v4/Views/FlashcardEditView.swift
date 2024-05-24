@@ -21,14 +21,19 @@ struct FlashCardEditView: View {
     
     
 struct FlashCardEditView_Previews: PreviewProvider {
+    static var subjects = Subject.sampleData
+
+    @ObservedObject static var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject static var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+   // @ObservedObject static var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
     
-    @ObservedObject static var fcVm = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards)
+    @ObservedObject static var fcVm = FlashCardViewViewModel(flashcards: Subject.sampleData[1].flashcards,flashCardUpdateCallBack:  parentViewModel.saveFlashCards)
     @ObservedObject static var vm = FlashCardListViewViewModel(flashcards:Subject.sampleData[1].flashcards,updateParentFlashCard: {updatefc in fcVm.updateFlashCard(flashcard: updatefc)});
     
     
     static var previews: some View {
         let sampleFlashcards = Subject.sampleData[1].flashcards
-        let fcVm = FlashCardViewViewModel(flashcards: sampleFlashcards)
+        let fcVm = FlashCardViewViewModel(flashcards: sampleFlashcards, flashCardUpdateCallBack: parentViewModel.saveFlashCards)
         let vm = FlashCardListViewViewModel(flashcards: sampleFlashcards, updateParentFlashCard: { updatefc in
             fcVm.updateFlashCard(flashcard: updatefc)
         })

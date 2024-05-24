@@ -11,9 +11,10 @@ import SwiftUI
 
 
 class SubjectDetailsViewViewModel: ObservableObject {
-   // @Published  var subject:Subject
     @Published var subject: Subject
     var updateParent: (Subject) -> Void
+    
+
 
     init(subject: Subject, updateParent: @escaping (Subject) -> Void) {
         self.subject = subject
@@ -24,6 +25,10 @@ class SubjectDetailsViewViewModel: ObservableObject {
         updateParent(subject)
     }
 
+    func saveFlashCards(flashcards: [FlashCard]){
+        subject.flashcards = flashcards
+        
+    }
 
     
 

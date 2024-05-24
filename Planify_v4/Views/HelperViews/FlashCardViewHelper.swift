@@ -31,7 +31,7 @@ struct FlashCardViewHelper: View {
             }
         }
         .sheet(isPresented: $viewModel.isPresentingAddView) {
-            FlashCardAddView()
+            FlashCardAddView(insertFlashCardCallBack:viewModel.insertFlashCard)
         }
     }
     @ViewBuilder
@@ -78,8 +78,14 @@ struct FlashCardViewHelper: View {
 
 #Preview {
     
-    @State  var flashCards = Subject.sampleData[0].flashcards
-    @StateObject  var parentViewModel = FlashCardViewViewModel(flashcards: flashCards)
+   // @State  var flashCards = Subject.sampleData[0].flashcards
+    
+    //@StateObject  var parentViewModel = FlashCardViewViewModel(flashcards: flashCards)
+    var subjects = Subject.sampleData
 
-    return FlashCardViewHelper(viewModel: parentViewModel)
+    @ObservedObject var grandParentViewModel = SubjectViewViewModel(subjects: subjects)
+    @ObservedObject var parentViewModel = SubjectDetailsViewViewModel(subject: grandParentViewModel.subjects[0], updateParent: grandParentViewModel.updateSubject)
+    @ObservedObject var childViewModel = FlashCardViewViewModel(flashcards: parentViewModel.subject.flashcards,flashCardUpdateCallBack: parentViewModel.saveFlashCards)
+    
+    return FlashCardViewHelper(viewModel: childViewModel)
 }
