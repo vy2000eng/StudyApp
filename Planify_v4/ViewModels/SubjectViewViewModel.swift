@@ -26,5 +26,7 @@ class SubjectViewViewModel: ObservableObject{
            }
        }
     
+   
+    
 
 }

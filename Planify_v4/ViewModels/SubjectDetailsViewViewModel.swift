@@ -13,12 +13,14 @@ import SwiftUI
 class SubjectDetailsViewViewModel: ObservableObject {
     @Published var subject: Subject
     var updateParent: (Subject) -> Void
+    //var onSaveSubject:(Subject) -> Void
     
 
 
     init(subject: Subject, updateParent: @escaping (Subject) -> Void) {
         self.subject = subject
         self.updateParent = updateParent
+        //self.onSaveSubject = saveSubjectCallBack
     }
 
     func saveChanges() {
@@ -27,7 +29,12 @@ class SubjectDetailsViewViewModel: ObservableObject {
 
     func saveFlashCards(flashcards: [FlashCard]){
         subject.flashcards = flashcards
-        
+        saveChanges()
+    }
+    
+    func saveSubjects(subject:Subject){
+
+        self.subject = subject
     }
 
     
