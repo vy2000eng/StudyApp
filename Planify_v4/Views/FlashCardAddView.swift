@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FlashCardAddView: View {
     @Environment(\.dismiss) private var dismiss
+    @State var showingSaveAlert = false
     
     
     @State var flashcard = FlashCard(front: "Term...           ", back: "Definition...          ")
@@ -87,9 +88,10 @@ struct FlashCardAddView: View {
                // }
             }
             Button(action: {
+                showingSaveAlert = true
               
-                triggerInsertFlashCardCallBack(flashcard: flashcard)
-                dismiss()
+                //triggerInsertFlashCardCallBack(flashcard: flashcard)
+                //dismiss()
             },
                    label: {
                 ZStack {
@@ -100,6 +102,19 @@ struct FlashCardAddView: View {
                         .bold()
                 }
             })
+            .alert(isPresented: $showingSaveAlert) {
+                          Alert(
+                              title: Text("Confirm Save"),
+                              message: Text("Are you sure you want to save this flashcard?"),
+                              primaryButton: .destructive(Text("Save")) {
+                                 // onInsert(flashcard)
+                                  triggerInsertFlashCardCallBack(flashcard: flashcard)
+
+                                  dismiss()
+                              },
+                              secondaryButton: .cancel()
+                          )
+                      }
         }
     }
 }
